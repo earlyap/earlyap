@@ -10,6 +10,8 @@ const bodyParser  = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors())
+app.use(express.static('./'));
+
 
 app.post('/scores', function (req, res) {
   if (!req.body.username || !req.body.password) 
@@ -57,7 +59,7 @@ app.post('/scores', function (req, res) {
   })
 })
 
-app.listen(80, function () {
-  console.log('Listening on port 80!')
+app.listen(process.env.PORT, function () {
+  console.log('Listening!')
 });
 
