@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+
+  <style>
+    * {
+      font-family: monospace
+    }
+  </style>
+
+  <body>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <form style="padding: 20px" id="userForm" class="form-inline">
+      <div>
+        <label>Username</label>
+        <input type="text" id="username">
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" id="password">
+      </div>
+      <button id="submitButton" style="margin-top: 10px" type="submit">Check Scores</button>
+    </form>
+
+    <div style="padding: 20px">
+      FAQ: <br>
+      Can you see my pass? <br>
+      If I wanted to, yes, no doubt about it. <br>
+      <br>
+      Will you look at my pass? <br>
+      No. But trusting me is up to you. <br>
+      <br>
+      So how secure is this thing? <br>
+      Your password is sent via HTTPS. It isn't saved on ANY LOGS, ANYWHERE. Code's on Github. <br>
+      <br>
+      Why don't I use earlyscoreXYZ instead? <br>
+      This baby can handle a shit ton of load. It won't break, unless I get blacklisted by collegeboard. <br>
+      <br>
+      Nothing's coming up! What's wrong? <br>
+      You haven't accepted TOS on collegeboard's website OR collegeboard has blacklisted me.
+    </div>
+
+    <div style="padding: 20px"  class="score-results">
+    </div>
+
+  </body>
+
+  <script type="text/javascript">
+
+    var userForm = document.getElementById("userForm");
+
+    userForm.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      document.getElementById('password').value = "";
+      document.getElementById('username').value = "";
+
+      if (!username || !password) {
+        alert("Pleae enter both the user and comparator");
+        return;
+      }
+      document.getElementById('submitButton').disabled = true;
+      axios.post('http://localhost:3000/scores', {
+        username: username,
+        password: password
+      }).then(function(body){
+        document.getElementsByClassName("score-results")[0].innerHTML = body.data.parsedHTML;
+        document.getElementById('submitButton').disabled = false;
+      });
+
+    });
+
+  </script>
+</html>
