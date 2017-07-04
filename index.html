@@ -33,7 +33,7 @@
       No. But trusting me is up to you. <br>
       <br>
       So how secure is this thing? <br>
-      Your password is sent via HTTPS. It isn't saved on ANY LOGS, ANYWHERE. Code's on Github. <br>
+      Your password is sent from a server to Collegeboard via HTTPS. It isn't saved on ANY LOGS, ANYWHERE. Code's on Github. <br>
       <br>
       Why don't I use earlyscoreXYZ instead? <br>
       This baby can handle a shit ton of load. It won't break, unless I get blacklisted by collegeboard. <br>
@@ -66,7 +66,7 @@
         return;
       }
       document.getElementById('submitButton').disabled = true;
-      axios.post('http://localhost:3000/scores', {
+      axios.post('http://67.205.180.222/scores', {
         username: username,
         password: password
       }).then(function(body){
