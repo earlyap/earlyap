@@ -1,5 +1,4 @@
 const request = require("request-promise-native");
-const cheerio = require('cheerio');
 
 const express = require('express')
 const app = express();
@@ -53,8 +52,7 @@ app.post('/scores', function (req, res) {
     // but gives you a 302 on the right password wtaf
   .catch(body => {
     request(getScoresOptions).then(body => {
-      const $ = cheerio.load(body);
-      res.send({parsedHTML: $('div #scoresListArea').html()});
+      res.send({parsedHTML: body});
     })
   })
 })
